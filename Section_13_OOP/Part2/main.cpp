@@ -28,9 +28,9 @@
             }
 
 
-        std::string get_name(){return name; }
-        int get_health(){return health; }
-        int get_xp(){return xp; }
+        std::string get_name() const {return name; }
+        int get_health() const {return health; }
+        int get_xp() const {return xp; }
 
 
             //inside of main.cpp
@@ -45,7 +45,7 @@ class ShallowDeep {
 
     public:
     void set_data_value(int d){ *data = d; }
-    int get_data_value(){ return *data; }
+    int get_data_value() const { return *data; }
 
     ShallowDeep(int d);
 
