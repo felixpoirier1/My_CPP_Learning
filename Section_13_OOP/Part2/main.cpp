@@ -7,7 +7,6 @@
     public:
         std::string name {};
         int health {};
-    private:
         int xp;
 
     public:
@@ -20,10 +19,19 @@
         void talk(std::string words){
             std::cout << name << " says : " << words << std::endl;
         }
+        //prototype of copy constructor
+        Player(const Player &source);
 
-        int get_xp(){
-            return xp;
-        }
+        //destructor
+        ~Player(){
+            std::cout << "Destructor called for"<< name << std::endl; 
+            }
+
+
+        std::string get_name(){return name; }
+        int get_health(){return health; }
+        int get_xp(){return xp; }
+
 
             //inside of main.cpp
         bool is_dead();
@@ -37,6 +45,11 @@ Player::Player(std::string name_val, int health_val, int xp_val)
 
 }
 
+//copy constructor
+Player::Player(const Player &source)
+    :name(source.name), health(source.health), xp(source.xp){
+        std::cout << "Copy constructor made a copy of " << source.name << std::endl;
+    }
 
 
 
@@ -48,6 +61,12 @@ bool Player::is_dead(){
 
         else return 0;
     };
+
+void display_player(Player p){
+    std::cout << "Name: " << p.get_name() << std::endl;
+    std::cout << "Health: " << p.get_health() << std::endl;
+    std::cout << "Xp: " << p.get_xp() << std::endl;
+}
 
 
 
@@ -66,6 +85,8 @@ int main(){
 
     //using the "all attributes" constructor
     Player allen{"Allen", 100, 10};
+
+    display_player(josh);
 
 
 
