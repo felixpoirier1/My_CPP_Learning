@@ -24,7 +24,7 @@
 
         //destructor
         ~Player(){
-            std::cout << "Destructor called for"<< name << std::endl; 
+            std::cout << "Destructor called for: "<< name << std::endl; 
             }
 
 
@@ -38,7 +38,8 @@
 
 };
 
-class Shallow {
+//shit class for pointer attributes
+class ShallowDeep {
     private:
     int *data;
 
@@ -46,13 +47,15 @@ class Shallow {
     void set_data_value(int d){ *data = d; }
     int get_data_value(){ return *data; }
 
-    Shallow(int d);
+    ShallowDeep(int d);
 
-    Shallow(const Shallow &source);
+    ShallowDeep(const ShallowDeep &source);
 
-    ~Shallow();
+    ~ShallowDeep();
 
 };
+
+
 
 
 Player::Player(std::string name_val, int health_val, int xp_val) 
@@ -81,22 +84,34 @@ void display_player(Player p){
     std::cout << "Xp: " << p.get_xp() << std::endl;
 }
 
-Shallow::Shallow(int d){
+
+
+//Default constructor
+ShallowDeep::ShallowDeep(int d){
     data = new int;
     *data = d;
 }
 
-Shallow::Shallow(const Shallow &source)
+// THIS IS GARBAGE COPY, Shallow uses pointers
+// therefore this copy essentially gives different pointers
+// that all point to the same thing
+/* ShallowDeep::ShallowDeep(const ShallowDeep &source)
     : data(source.data){
         std::cout <<"Copy constructor - shallow copy" << std::endl;
-}
+} */
 
-Shallow::~Shallow(){
+//THIS IS GOOD COPY, Deep copy
+ShallowDeep::ShallowDeep(const ShallowDeep &source)
+    : ShallowDeep(*source.data){
+    std::cout <<"Copy constructor - deep copy" << std::endl;
+} 
+
+ShallowDeep::~ShallowDeep(){
     delete data;
     std::cout << "Destructor freeing data" << std::endl;
 }
 
-void display_shallow(Shallow s){
+void display_shallow(ShallowDeep s){
     std::cout << s.get_data_value() << std::endl;
 }
 
@@ -121,10 +136,10 @@ int main(){
 
     Player allen_copy{allen};
 
-    Shallow obj1 {100};
+    ShallowDeep obj1 {100};
     display_shallow(obj1);
-    
-    Shallow obj2 {obj1};
+
+    ShallowDeep obj2 {obj1};
     obj2.set_data_value(1000);
 
 
