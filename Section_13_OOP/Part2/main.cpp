@@ -27,7 +27,7 @@
             std::cout << "Destructor called for: "<< name << std::endl; 
             }
 
-
+        //if method does not change the attributes label as "const"
         std::string get_name() const {return name; }
         int get_health() const {return health; }
         int get_xp() const {return xp; }
@@ -130,7 +130,7 @@ int main(){
     std::cout << "\nJosh's XP is : " << josh.get_xp() << std::endl;
 
     //using the "all attributes" constructor
-    Player allen{"Allen", 100, 10};
+    const Player allen{"Allen", 100, 10};
 
     display_player(josh);
 
