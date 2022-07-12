@@ -38,6 +38,22 @@
 
 };
 
+class Shallow {
+    private:
+    int *data;
+
+    public:
+    void set_data_value(int d){ *data = d; }
+    int get_data_value(){ return *data; }
+
+    Shallow(int d);
+
+    Shallow(const Shallow &source);
+
+    ~Shallow();
+
+};
+
 
 Player::Player(std::string name_val, int health_val, int xp_val) 
     : name{name_val}, health{health_val}, xp{xp_val}{
@@ -50,9 +66,6 @@ Player::Player(const Player &source)
     :name(source.name), health(source.health), xp(source.xp){
         std::cout << "Copy constructor made a copy of " << source.name << std::endl;
     }
-
-
-
 
 //declaring method outside the scope of Player
 bool Player::is_dead(){
@@ -68,6 +81,24 @@ void display_player(Player p){
     std::cout << "Xp: " << p.get_xp() << std::endl;
 }
 
+Shallow::Shallow(int d){
+    data = new int;
+    *data = d;
+}
+
+Shallow::Shallow(const Shallow &source)
+    : data(source.data){
+        std::cout <<"Copy constructor - shallow copy" << std::endl;
+}
+
+Shallow::~Shallow(){
+    delete data;
+    std::cout << "Destructor freeing data" << std::endl;
+}
+
+void display_shallow(Shallow s){
+    std::cout << s.get_data_value() << std::endl;
+}
 
 
 int main(){
@@ -87,6 +118,15 @@ int main(){
     Player allen{"Allen", 100, 10};
 
     display_player(josh);
+
+    Player allen_copy{allen};
+
+    Shallow obj1 {100};
+    display_shallow(obj1);
+    
+    Shallow obj2 {obj1};
+    obj2.set_data_value(1000);
+
 
 
 
