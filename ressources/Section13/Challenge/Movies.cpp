@@ -31,8 +31,13 @@ Movies::~Movies() {
     and add that movie object to the movies vector and return true
     *********************************************************************/
 bool Movies::add_movie(std::string name, std::string rating, int watched) {
-    // you implement this method
-    return false;
+    for (const Movie &movie: movies){
+        if(movie.get_name() == name)
+            return false;
+        }
+    Movie temp {name, rating, watched};
+    movies.push_back(temp);
+    return true;
 }
 
  /*************************************************************************
@@ -47,8 +52,13 @@ bool Movies::add_movie(std::string name, std::string rating, int watched) {
     provided exists to increment
     *********************************************************************/
 bool Movies::increment_watched(std::string name) {
-   // you implement this method
-   return false;
+    for(Movie &movie: movies){
+        if (movie.get_name() == name){
+            movie.increment_watched();
+            return true;
+        }
+    }
+    return false;
 }
 
 /*************************************************************************
@@ -59,5 +69,15 @@ bool Movies::increment_watched(std::string name) {
     object displays itself
     *********************************************************************/
 void Movies::display() const {
-   // You implement this method
+    if (movies.size()==0){
+        std::cout << "Sorry no movies to display"<<std::endl;
+    }
+    else{
+        std::cout<<"\n ========================================="<< std::endl;
+        for(const Movie &movie: movies){
+            movie.display();
+        }
+        std::cout<<"\n ========================================="<< std::endl;
+
+    }
 }

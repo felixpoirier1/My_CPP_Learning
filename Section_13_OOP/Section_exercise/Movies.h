@@ -1,22 +1,23 @@
+#include "Movie.h"
 #ifndef _MOVIES_H_
 #define _MOVIES_H_
-#include <vector>
-#include "Movie.h"
+
 class Movies
 {
 private:
-    std::vector<Movie> library;
-
+    std::vector<Movie> movies;
 public:
     Movies();
     ~Movies();
 
-    void add_movie(Movie movie);
-
+    bool increment_watched(std::string name);
+    bool add_movie(std::string name, std::string rating, int watched);
     void display();
-
-
 };
+
+
+
+
 
 
 

@@ -1,25 +1,31 @@
 #ifndef _MOVIE_H_
 #define _MOVIE_H_
-#include <string>
 #include <iostream>
+#include <vector>
+#include <string>
 
-class Movie{
-    //attributes
+class Movie
+{
+private:
     std::string name {};
     std::string rating {};
     int watched {};
+public:
+    Movie(std::string name_val, std::string rating_val, int watched_val);
+    ~Movie();
 
-    friend void increment_watched(Movie &movie);
-    public:
-    //constructors
-    Movie(std::string name, std::string rating, int watched);
-    Movie(const Movie &source);
+    std::string get_name() const {return name; }
+    std::string get_rating() const {return rating; }
+    int get_watched() const {return watched; } 
 
-    std::string get_name(){return name; }
-    std::string get_rating(){return rating; }
-    int get_watched(){return watched; }
+    void display() const;
 
 };
+
+
+
+
+
 
 
 #endif

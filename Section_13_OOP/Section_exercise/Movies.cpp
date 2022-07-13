@@ -1,7 +1,6 @@
 #include "Movies.h"
-#include <iostream>
 
-Movies::Movies(/* args */)
+Movies::Movies()
 {
 }
 
@@ -9,14 +8,29 @@ Movies::~Movies()
 {
 }
 
-void Movies::add_movie(Movie movie){
-    library.push_back(movie);
+bool Movies::add_movie(std::string name, std::string rating, int watched){
+    for(const Movie &movie: movies){
+        if (movie.get_name()==name)
+            return false;
+    }
+    return true;
+}
+
+bool Movies::increment_watched(std::string name){
+    for(Movie &movie: movies){
+        if (movie.get_name()==name)
+            return true;
+    }
+    return false;
 }
 
 void Movies::display(){
-    for(Movie movie: library){
-        std::cout << movie.get_name() << "\t" 
-        << movie.get_rating() << "\t" 
-        << movie.get_watched()<<std::endl;
+    if(movies.size() != 0){
+        std::cout << "\n==========================" << std::endl;
+        for(const Movie &movie: movies){
+            movie.display();
+        }
+        std::cout << "\n==========================" << std::endl;
     }
+    else std::cout << "Sorry no movie found"<<std::endl;
 }
