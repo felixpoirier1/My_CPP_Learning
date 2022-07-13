@@ -3,13 +3,17 @@
 #include <vector>
 
  class Player{
+
+    private:
+    static int num_players;
+
     //ATTRIBUTES
     public:
         std::string name {};
         int health {};
         int xp;
 
-    public:
+
 
         Player(std::string name_val="None", int health_val=0, int xp_val=0);
 
@@ -24,7 +28,8 @@
 
         //destructor
         ~Player(){
-            std::cout << "Destructor called for: "<< name << std::endl; 
+            std::cout << "Destructor called for: "<< name << std::endl;
+            --num_players; 
             }
 
         //if method does not change the attributes label as "const"
@@ -35,6 +40,10 @@
 
             //inside of main.cpp
         bool is_dead();
+
+        static int get_num_players(){
+            return num_players;
+        }
 
 };
 
@@ -61,14 +70,22 @@ class ShallowDeep {
 Player::Player(std::string name_val, int health_val, int xp_val) 
     : name{name_val}, health{health_val}, xp{xp_val}{
         std::cout << "Three args constructor" << std::endl;
+        ++num_players;
 
 }
 
 //copy constructor
-Player::Player(const Player &source)
+/* Player::Player(const Player &source)
     :name(source.name), health(source.health), xp(source.xp){
         std::cout << "Copy constructor made a copy of " << source.name << std::endl;
+        ++num_players;
     }
+ */
+Player::Player(const Player &source)
+    :Player{source.name, source.health, source.xp}{
+        std::cout << "Copy constructor call for: "<< source.name<<std::endl;
+    }
+
 
 //declaring method outside the scope of Player
 bool Player::is_dead(){
@@ -115,26 +132,38 @@ void display_shallow(ShallowDeep s){
     std::cout << s.get_data_value() << std::endl;
 }
 
+//STATIC initialization
+int Player::num_players {};
 
 int main(){
     //simple definitions
     Player frank;
     Player hero;
 
+    std::cout << "Number of players" << Player::get_num_players() << std::endl;
+
     //assessing the attributes of frank (object of type Player)
     frank.name = "Frank";
     frank.health = 100;
 
     Player josh {"Josh", 100};
-
+    
+    
     std::cout << "\nJosh's XP is : " << josh.get_xp() << std::endl;
 
     //using the "all attributes" constructor
+    //as a const object
     const Player allen{"Allen", 100, 10};
 
     display_player(josh);
 
+    Player *enemy = new Player("Enemy", 200, 15);
+    std::cout << "Number of players" << Player::get_num_players() << std::endl;
+    delete enemy;
+
     Player allen_copy{allen};
+    std::cout << "Number of players" << Player::get_num_players() << std::endl;
+
 
     ShallowDeep obj1 {100};
     display_shallow(obj1);
