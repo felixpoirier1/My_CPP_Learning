@@ -9,7 +9,7 @@ private:
 public:
     Movies();                       //Constructor
     Movies(const Movies &source);   //Copy constructor
-    Movies(Movies &&m);    //Move constructor
+    Movies(Movies &&m);             //Move constructor
     ~Movies();                      //Destructor
 
     bool increment_watched(std::string name);
