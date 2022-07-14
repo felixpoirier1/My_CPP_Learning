@@ -1,23 +1,39 @@
 #include "Movies.h"
-
-Movies::Movies()
-{
+#include <vector>
+#include <string>
+//Constructor
+Movies::Movies(){
+    movies = new std::vector<Movie>;
 }
 
-Movies::~Movies()
-{
+//Copy constructor
+Movies::Movies(const Movies &source){
+    movies = new std::vector<Movie> (*source.movies);
+}
+
+//Move constructor
+Movies::Movies(Movies &&source) 
+    : movies {source.movies}{
+    source.movies = nullptr;
+}
+
+//Destructor
+Movies::~Movies(){
+    delete movies;
 }
 
 bool Movies::add_movie(std::string name, std::string rating, int watched){
-    for(const Movie &movie: movies){
+    for(Movie &movie: *movies){
         if (movie.get_name()==name)
             return false;
     }
+    Movie new_movie{name, rating, watched};
+    movies->push_back(new_movie);
     return true;
 }
 
 bool Movies::increment_watched(std::string name){
-    for(Movie &movie: movies){
+    for(Movie &movie: *movies){
         if (movie.get_name()==name)
             return true;
     }
@@ -25,9 +41,9 @@ bool Movies::increment_watched(std::string name){
 }
 
 void Movies::display(){
-    if(movies.size() != 0){
+    if(movies->size() != 0){
         std::cout << "\n==========================" << std::endl;
-        for(const Movie &movie: movies){
+        for(const Movie &movie: *movies){
             movie.display();
         }
         std::cout << "\n==========================" << std::endl;
