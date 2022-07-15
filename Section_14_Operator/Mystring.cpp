@@ -24,6 +24,12 @@ Mystring::Mystring(const Mystring &source)
         std::strcpy(str, source.str);
     }
 
+Mystring::Mystring(Mystring &&source)
+    :str(source.str){
+        source.str = nullptr;
+        std::cout << "Move constructor used" << std::endl;
+    }
+
 Mystring::~Mystring(){
     delete [] str;
 }
@@ -37,9 +43,20 @@ Mystring &Mystring::operator=(const Mystring &rhs){
     delete [] this->str;
     str = new char[std::strlen(rhs.str)+1];
     std::strcpy(str, rhs.str);
-    return this;
+    return *this;
 }
 
+//move assignment (operator "=")
+Mystring &Mystring::operator=(Mystring &&rhs){
+    std::cout << "Move assignment" <<std::endl;
+    if(this == &rhs)
+        return *this;
+    
+    delete [] this->str;
+    str = rhs.str;
+    rhs.str = nullptr;
+    return *this;
+}
 
 
 void Mystring::display() const{

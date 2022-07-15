@@ -11,10 +11,13 @@ public:
     Mystring();
     Mystring(const char *s);
     Mystring(const Mystring &source);
+    Mystring(Mystring &&source);
     ~Mystring();
 
     //overload
     Mystring &operator=(const Mystring &rhs);   //copy assignment
+    Mystring &operator=(Mystring &&rhs);  //move assignment
+
 
     void display() const;
     int get_length() const;
