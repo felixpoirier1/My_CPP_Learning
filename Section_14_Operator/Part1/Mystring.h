@@ -18,12 +18,17 @@ public:
     friend bool operator<(const Mystring &lhs, const Mystring &rhs);
     friend bool operator>(const Mystring &lhs, const Mystring &rhs);
 
+    //stream operators
+    friend std::ostream &operator<<(std::ostream &os, const Mystring &rhs);
+    friend std::istream &operator>>(std::istream &in, Mystring &rhs);
+
     //overload
     Mystring &operator=(const Mystring &rhs);       //copy assignment
     Mystring &operator=(Mystring &&rhs);            //move assignment
     Mystring operator-() const;                     //make lowercase
     Mystring operator+(const Mystring &rhs) const;  //concat
     bool operator==(const Mystring &rhs) const;     //compare
+
 
 
     void display() const;

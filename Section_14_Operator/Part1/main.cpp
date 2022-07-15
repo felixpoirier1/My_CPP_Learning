@@ -46,13 +46,18 @@ int main(){
     std::cout << std::boolalpha;
 
     std::cout << (larry == stooge) << std::endl;
-    std::cout << larry_l.get_str() << std::endl;
-    std::cout << larryjosh.get_str() << std::endl;
+    std::cout << larry_l << std::endl;
+    std::cout << larryjosh << std::endl;
     
     std::cout << (+larryjosh).get_str() << std::endl;
 
     std::cout << (larry < josh) << std::endl;
     std::cout << (larry > josh) << std::endl;
+
+    std::cout << "Create a new string : ";
+    Mystring name;
+    std::cin >> name;
+    std::cout << "The new string "<< name << " holds " << name.get_length() << " characters" << std::endl;
 
 
     return 0;

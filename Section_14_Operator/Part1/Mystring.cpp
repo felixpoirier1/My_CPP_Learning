@@ -96,3 +96,15 @@ int Mystring::get_length() const{
 const char *Mystring::get_str() const{
     return str;
 }
+
+std::ostream &operator<<(std::ostream &os, const Mystring &rhs){
+    os << rhs.str;
+    return os;
+}
+std::istream &operator>>(std::istream &in, Mystring &rhs){
+    char *buff = new char[1000];
+    in >> buff;
+    rhs = Mystring{buff};
+    delete [] buff;
+    return in;
+}
