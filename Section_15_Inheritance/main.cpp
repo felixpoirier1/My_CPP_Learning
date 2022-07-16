@@ -26,7 +26,7 @@ int main() {
 // Use the Savings Account class
     
     cout << "\n=== Savings Account ==========================" << endl;
-    Savings_Account sav_acc {500, "Denny account", 0.03};
+    Savings_Account sav_acc {500, "Denny's account", 0.03};
     sav_acc.deposit(2000.0);               
     sav_acc.withdraw(500.0);
     std::cout << sav_acc.balance <<std::endl;
@@ -38,7 +38,12 @@ int main() {
     p_sav_acc->withdraw(500.0);
     delete p_sav_acc;
 
-    cout << "\n==============================================" << endl;
+    cout << "\n=== Copying ==================================" << endl;
+
+    Savings_Account sav_acc2{sav_acc};
+    Savings_Account sav_acc3{30'000, "Frank's account", 0.025};
+    sav_acc = sav_acc3;
+
     return 0;
 }
 
