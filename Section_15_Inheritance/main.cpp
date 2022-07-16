@@ -26,10 +26,10 @@ int main() {
 // Use the Savings Account class
     
     cout << "\n=== Savings Account ==========================" << endl;
-    Savings_Account sav_acc {};
+    Savings_Account sav_acc {500, "Denny account", 0.03};
     sav_acc.deposit(2000.0);               
     sav_acc.withdraw(500.0);
-    
+    std::cout << sav_acc.balance <<std::endl;
     cout << endl;
     
     Savings_Account *p_sav_acc {nullptr};

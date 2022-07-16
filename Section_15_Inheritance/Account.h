@@ -5,12 +5,15 @@
 class Account
 {
 public:
-    double balance;
+    double balance{};
     std::string name;
+
+    Account();
+    Account(double balance_val, std::string name_val);
+    ~Account();
+
     void deposit(double amount);
     void withdraw(double amount);
-    Account();
-    ~Account();
 };
 
 #endif // _ACCOUNT_H_
