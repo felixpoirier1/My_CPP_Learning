@@ -14,10 +14,7 @@ Savings_Account::~Savings_Account(){
     std::cout << "Savings account destructor was called" << std::endl;
 }
 void Savings_Account::deposit(double amount){
-    balance += amount;
+    amount = amount*(1+int_rate);
+    Account::deposit(amount);
     std::cout << "Savings Account deposit called with "<< amount << std::endl;
-}
-void Savings_Account::withdraw(double amount){
-    balance -= amount;
-    std::cout << "Savings Account withdraw called with "<< amount << std::endl;
 }

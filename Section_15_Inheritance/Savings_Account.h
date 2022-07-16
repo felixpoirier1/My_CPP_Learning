@@ -23,7 +23,8 @@ public:
     }
     ~Savings_Account();
     void deposit(double amount);
-    void withdraw(double amount);
+
+    friend std::ostream &operator<<(std::ostream &os, const Savings_Account &account);
 
 };
 
