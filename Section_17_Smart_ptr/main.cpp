@@ -19,6 +19,10 @@ public:
     ~Test(){std::cout << "Test destructor (" << data << ")" << std::endl;}
 };
 
+void my_deleter(Account *ptr){
+    std::cout << "\tUsing my custom function deleter" << std::endl;
+    delete ptr;
+}
 
 using namespace std;
 
@@ -68,9 +72,12 @@ int main() {
 
     std::cout << "Use count: " << p1.use_count() << std::endl;
 
-    //weak pointer
-    
+    //weak pointer (see ressources)
 
+    //using deleters
+    {
+    std::shared_ptr<Account> p5 {new Checking_Account{"Robert", 1000}, my_deleter};
+    }
     return 0;
 }
 
