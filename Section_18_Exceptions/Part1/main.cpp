@@ -1,11 +1,21 @@
 #include <iostream>
 #include <string>
 
+class DivisionByZeroException{
+public:
+    std::string desc {"Cannot divide by zero"};
+};
+
+class NegativeValueException{
+public:
+    std::string desc {"Cannot have negative values"};
+};
+
 double calculate_mpg(int miles, int gallons){
     if (gallons==0)
-        throw 0;
+        throw DivisionByZeroException();
     if (gallons < 0 || miles <0)
-        throw std::string {"Sorry miles or gallons cannot be smaller than 0"};
+        throw NegativeValueException();
     return static_cast<double>(miles)/gallons;
 }
 
@@ -31,10 +41,10 @@ int main(){
     }
     try {
         std::cout<< "Result using function: " << calculate_mpg(miles, gallons) << std::endl;
-    } catch (int &ex) {
-        std::cerr << "Sorry function can't divide by zero" << std::endl;
-    } catch (std::string &ex){
-        std::cerr << ex << std::endl;
+    } catch (const DivisionByZeroException &ex) {
+        std::cerr << ex.desc << std::endl;
+    } catch (const NegativeValueException &ex){
+        std::cerr << ex.desc << std::endl;
     }
     std::cout << "bye" << std::endl;
 
